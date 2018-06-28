@@ -1,8 +1,10 @@
 package com.pokemon.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 //adnotacje Springa
 //@Service //zostanie przy starcie utworzona pojedyńcza instancja, najczęściej używana, podstawowa
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PokemonClientRest {
     //ta klasa ma udostępnić endPoint
     //zczytamy z Pokemon i wyświetlimy jako swoje już
+
+
 
 
     @RequestMapping("/pokemon")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
