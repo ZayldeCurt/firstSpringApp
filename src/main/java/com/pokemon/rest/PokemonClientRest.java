@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 //adnotacje Springa
-//@Service //zostanie przy starcie utworzona pojedyńcza instancja, najczęściej używana, podstawowa
+//@Service //zostanie przy starcie utworzona pojedyńcza instancja, najczęściej używana, podstawowa //dodatkowo dodaje static do method
 @RestController //mówi że tu będzie klasa świadcząca usługi restowe, czyli po http
 public class PokemonClientRest {
     //ta klasa ma udostępnić endPoint
