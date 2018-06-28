@@ -14,6 +14,8 @@ public class PokemonClientRest {
     //zczytamy z Pokemon i wyświetlimy jako swoje już
 
 
+    @Autowired //to samo co @inject tylko inject jest ogolnie dla javy
+    RestTemplate restTemplate;
 
 
     @RequestMapping("/pokemon")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
