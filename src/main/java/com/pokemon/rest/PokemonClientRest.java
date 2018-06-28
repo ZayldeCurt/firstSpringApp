@@ -1,0 +1,24 @@
+package com.pokemon.rest;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+//adnotacje Springa
+//@Service //zostanie przy starcie utworzona pojedyńcza instancja, najczęściej używana, podstawowa
+@RestController //mówi że tu będzie klasa świadcząca usługi restowe, czyli po http
+public class PokemonClientRest {
+    //ta klasa ma udostępnić endPoint
+    //zczytamy z Pokemon i wyświetlimy jako swoje już
+
+
+    @RequestMapping("/pokemon")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
+    // dzieki temu będzie ta funkcja widoczna z localhost:8080
+    public String getOurPokemon(){
+        //todo client to pokemon api (https://www.pokeapi.co/)
+        // to get information about Resource for bulbasaur
+
+        return "here will be our pokemon";
+    }
+
+}
