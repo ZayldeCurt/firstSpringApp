@@ -1,16 +1,16 @@
 package com.pokemon.service;
 
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.client.RestTemplate;
+import com.pokemon.dto.AbilityDto;
+import com.pokemon.dto.PokemonDto;
+import com.pokemon.dto.TypeDto;
+
 
 public interface PokemonService {
 
     public String getString(String endPoint,String id);
+    public PokemonDto getPokemon(String endPoint,String id);
+    public TypeDto getType(String endPoint,String id);
+    public AbilityDto getAbility(String endPoint,String id);
+
 
 }

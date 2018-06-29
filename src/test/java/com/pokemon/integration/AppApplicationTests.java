@@ -1,4 +1,4 @@
-package com.pokemon.app;
+package com.pokemon.integration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,5 +1,8 @@
 package com.pokemon.rest;
 
+import com.pokemon.dto.AbilityDto;
+import com.pokemon.dto.PokemonDto;
+import com.pokemon.dto.TypeDto;
 import com.pokemon.service.PokemonService;
 import com.pokemon.service.PokemonServiceImp;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -23,25 +26,50 @@ public class PokemonClientRest {
     //ta klasa ma udostępnić endPoint
     //zczytamy z Pokemon i wyświetlimy jako swoje już
 
-
-    @Autowired //to samo co @inject tylko inject jest ogolnie dla javy
-    RestTemplate restTemplate;
+    private PokemonService pokemonService;
 
     @Autowired
-    PokemonService pokemonService;
+    public PokemonClientRest(PokemonService pokemonService) {
+        this.pokemonService = pokemonService;
+    }
 
     @RequestMapping("/{endPoint}/{id}")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
     // dzieki temu będzie ta funkcja widoczna z localhost:8080
     public String getOurPokemon(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id){
 
-        String result = pokemonService.getString(endPoint,id);
+//        String result = pokemonService.getString(endPoint,id);
 
-        if(endPoint.equals("pokemon")){
-            String pokemonName = result.split(",\"name\":\"")[1].split("\"}],")[0];
-            return pokemonName;
+//        if(endPoint.equals("pokemon")){
+//            PokemonDto pokemonDto = pokemonService.getPokemon(result);
+//            String pokemonName = result.split(",\"name\":\"")[1].split("\"}],")[0];
+//            return pokemonName;
+//        }
+//        return result;
+
+        switch (endPoint){
+            case "pokemon":
+                PokemonDto pokemonDto = pokemonService.getPokemon(endPoint, id);
+                return pokemonDto.getName();
+//                break;
+            case "type":
+                TypeDto typeDto = pokemonService.getType(endPoint, id);
+                return typeDto.getName();
+//                break;
+            case "ability":
+                AbilityDto abilityDto = pokemonService.getAbility(endPoint, id);
+                return  abilityDto.getName();
+//                break;
+            default:
+                break;
         }
-        return result;
-
+        return null;
+//       if(endPoint.equals("pokemon")) {
+//           PokemonDto pokemonDto = pokemonService.getPokemon(endPoint, id);
+//           return pokemonDto.getName();
+//       }else {
+//           String result = pokemonService.getString(endPoint,id);
+//           return result;
+//       }
     }
 
 }
