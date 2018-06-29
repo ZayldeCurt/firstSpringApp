@@ -8,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,11 +26,13 @@ public class PokemonClientRest {
     RestTemplate restTemplate;
 
 
-    @RequestMapping("/pokemon")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
+    @RequestMapping("/pokemon/{id}")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
     // dzieki temu będzie ta funkcja widoczna z localhost:8080
-    public String getOurPokemon(@RequestParam(value = "id") String id){
-        //todo client to pokemon api (https://www.pokeapi.co/)
-        // to get information about Resource for bulbasaur
+    public String getOurPokemon(@PathVariable(value = "id") String id){
+
+//        @RequestMapping("/hello/{id}")    public String getDetails(@PathVariable(value="id") String id,
+//                @RequestParam(value="param1", required=true) String param1,
+//                @RequestParam(value="param2", required=false) String param2)
 
         CloseableHttpClient httpClient
                 = HttpClients.custom()
