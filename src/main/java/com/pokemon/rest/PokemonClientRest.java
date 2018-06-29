@@ -1,5 +1,7 @@
 package com.pokemon.rest;
 
+import com.pokemon.service.PokemonService;
+import com.pokemon.service.PokemonServiceImp;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -25,33 +27,21 @@ public class PokemonClientRest {
     @Autowired //to samo co @inject tylko inject jest ogolnie dla javy
     RestTemplate restTemplate;
 
+    @Autowired
+    PokemonService pokemonService;
 
-    @RequestMapping("/pokemon/{id}")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
+    @RequestMapping("/{endPoint}/{id}")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
     // dzieki temu będzie ta funkcja widoczna z localhost:8080
-    public String getOurPokemon(@PathVariable(value = "id") String id){
+    public String getOurPokemon(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id){
 
-//        @RequestMapping("/hello/{id}")    public String getDetails(@PathVariable(value="id") String id,
-//                @RequestParam(value="param1", required=true) String param1,
-//                @RequestParam(value="param2", required=false) String param2)
+        String result = pokemonService.getString(endPoint,id);
 
-        CloseableHttpClient httpClient
-                = HttpClients.custom()
-                .setSSLHostnameVerifier(new NoopHostnameVerifier())
-                .build();
-        HttpComponentsClientHttpRequestFactory requestFactory
-                = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setHttpClient(httpClient);
+        if(endPoint.equals("pokemon")){
+            String pokemonName = result.split(",\"name\":\"")[1].split("\"}],")[0];
+            return pokemonName;
+        }
+        return result;
 
-        ResponseEntity<String> response
-                = new RestTemplate(requestFactory).exchange(
-                "http://pokeapi.co/api/v2/pokemon/"+id +"/", HttpMethod.GET, null, String.class);
-//        return response.getBody();
-
-        String result = response.toString();
-        String pokemonName = result.split(",\"name\":\"")[1].split("\"}],")[0];
-
-        return pokemonName;
     }
-
 
 }
