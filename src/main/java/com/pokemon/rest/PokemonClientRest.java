@@ -35,41 +35,51 @@ public class PokemonClientRest {
 
     @RequestMapping("/{endPoint}/{id}")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
     // dzieki temu będzie ta funkcja widoczna z localhost:8080
-    public String getOurPokemon(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id){
+    public PokemonDto getOurPokemon(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id){
 
-//        String result = pokemonService.getString(endPoint,id);
-
-//        if(endPoint.equals("pokemon")){
-//            PokemonDto pokemonDto = pokemonService.getPokemon(result);
-//            String pokemonName = result.split(",\"name\":\"")[1].split("\"}],")[0];
-//            return pokemonName;
-//        }
-//        return result;
-
-        switch (endPoint){
-            case "pokemon":
-                PokemonDto pokemonDto = pokemonService.getPokemon(endPoint, id);
-                return pokemonDto.getName();
-//                break;
-            case "type":
-                TypeDto typeDto = pokemonService.getType(endPoint, id);
-                return typeDto.getName();
-//                break;
-            case "ability":
-                AbilityDto abilityDto = pokemonService.getAbility(endPoint, id);
-                return  abilityDto.getName();
-//                break;
-            default:
-                break;
+        if(endPoint.equals("pokemon")){
+            PokemonDto pokemonDto = pokemonService.getPokemon(endPoint,id);
+            return pokemonDto;
         }
         return null;
-//       if(endPoint.equals("pokemon")) {
-//           PokemonDto pokemonDto = pokemonService.getPokemon(endPoint, id);
-//           return pokemonDto.getName();
-//       }else {
-//           String result = pokemonService.getString(endPoint,id);
-//           return result;
-//       }
+
+//        switch (endPoint){
+//            case "pokemon":
+//                T pokemonDto = pokemonService.getPokemon(endPoint, id);
+//                return pokemonDto;
+//
+//            case "type":
+//                TypeDto typeDto = pokemonService.getType(endPoint, id);
+//                return typeDto;
+//
+//            case "ability":
+//                AbilityDto abilityDto = pokemonService.getAbility(endPoint, id);
+//                return  abilityDto;
+//
+//            default:
+//                break;
+//        }
+//        return null;
     }
+
+//    @RequestMapping("/{endPoint}/{id}")
+//    public TypeDto getOurType(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id) {
+//
+//        if (endPoint.equals("type")) {
+//            TypeDto typeDto = pokemonService.getType(endPoint, id);
+//            return typeDto;
+//        }
+//        return null;
+//    }
+//
+//    @RequestMapping("/{endPoint}/{id}")
+//    public AbilityDto getOurAbility(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id) {
+//
+//        if (endPoint.equals("type")) {
+//            AbilityDto abilityDto = pokemonService.getAbility(endPoint, id);
+//            return abilityDto;
+//        }
+//        return null;
+//    }
 
 }

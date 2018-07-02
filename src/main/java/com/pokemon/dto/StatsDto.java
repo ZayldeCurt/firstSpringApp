@@ -7,6 +7,12 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StatsDto {
+
+    public StatsDto(int baseStat, String statName) {
+        this.baseStat = baseStat;
+        this.statName = statName;
+    }
+
     @JsonProperty("base_stat")
     private int baseStat;
 
@@ -26,11 +32,19 @@ public class StatsDto {
 
     }
 
-    public int isBaseStat() {
+    public int getBaseStat() {
         return baseStat;
     }
 
     public void setBaseStat(int baseStat) {
         this.baseStat = baseStat;
+    }
+
+    public String getStatName() {
+        return statName;
+    }
+
+    public void setStatName(String statName) {
+        this.statName = statName;
     }
 }

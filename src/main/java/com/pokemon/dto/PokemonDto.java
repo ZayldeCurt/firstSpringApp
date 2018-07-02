@@ -49,6 +49,14 @@ public class PokemonDto {
         this.speciesName = speciesName;
     }
 
+    public PokemonDto(String name, int weight, String speciesName, StatsDto[] stats, AbilitiesDto[] abilities) {
+        this.name = name;
+        this.weight = weight;
+        this.speciesName = speciesName;
+        this.stats = stats;
+        this.abilities = abilities;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -69,7 +77,21 @@ public class PokemonDto {
         this.speciesName = speciesName;
     }
 
+    public StatsDto[] getStats() {
+        return stats;
+    }
 
+    public void setStats(StatsDto[] stats) {
+        this.stats = stats;
+    }
+
+    public AbilitiesDto[] getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(AbilitiesDto[] abilities) {
+        this.abilities = abilities;
+    }
 }
 
 

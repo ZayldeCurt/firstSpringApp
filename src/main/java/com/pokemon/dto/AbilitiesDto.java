@@ -8,6 +8,11 @@ public class AbilitiesDto {
     public AbilitiesDto() {
     }
 
+    public AbilitiesDto(boolean isHidden, int slot) {
+        this.isHidden = isHidden;
+        this.slot = slot;
+    }
+
     public boolean isHidden() {
         return isHidden;
     }
@@ -29,4 +34,6 @@ public class AbilitiesDto {
 
     @JsonProperty("slot")
     private int slot;
+
+
 }
