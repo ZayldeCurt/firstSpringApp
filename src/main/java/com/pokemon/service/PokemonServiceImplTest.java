@@ -12,7 +12,7 @@ public class PokemonServiceImplTest implements PokemonService {
 
     @Override
     public PokemonDto getPokemon(String endPoint, String id) {
-        return new PokemonDto("bulbasaur","20");
+        return new PokemonDto("bulbasaur",20);
     }
 
     @Override

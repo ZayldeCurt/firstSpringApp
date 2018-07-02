@@ -1,9 +1,12 @@
 package com.pokemon.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pokemon.dto.AbilityDto;
 import com.pokemon.dto.PokemonDto;
+import com.pokemon.dto.StatsDto;
 import com.pokemon.dto.TypeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,20 +23,15 @@ public class ParseService {
 
     public PokemonDto parsePokemon(String content){
         ObjectMapper mapper = new ObjectMapper();
-        PokemonDto pokemonDto = null;
-
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
-            String jsonInString = content;
-
-            pokemonDto = mapper.readValue(jsonInString, PokemonDto.class);
-            String prettyPokemonDto = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(pokemonDto);
-            System.out.println(prettyPokemonDto);
+            return mapper.readValue(content, PokemonDto.class);
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        System.out.println(pokemonDto);
-        return pokemonDto;
     }
+
     public TypeDto parseType(String content){
         ObjectMapper mapper = new ObjectMapper();
         TypeDto typeDto = null;
