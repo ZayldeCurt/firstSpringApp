@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 //TODO http://www.baeldung.com/jackson-nested-values
@@ -33,12 +34,6 @@ public class PokemonDto {
 
     public PokemonDto() {
     }
-
-    public String getName() {
-
-        return name;
-    }
-
     public PokemonDto(String name, int weight) {
         this.name = name;
         this.weight = weight;
@@ -48,13 +43,30 @@ public class PokemonDto {
         this.weight = weight;
         this.speciesName = speciesName;
     }
-
     public PokemonDto(String name, int weight, String speciesName, StatsDto[] stats, AbilitiesDto[] abilities) {
         this.name = name;
         this.weight = weight;
         this.speciesName = speciesName;
         this.stats = stats;
         this.abilities = abilities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PokemonDto that = (PokemonDto) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
@@ -92,6 +104,8 @@ public class PokemonDto {
     public void setAbilities(AbilitiesDto[] abilities) {
         this.abilities = abilities;
     }
+
+
 }
 
 
