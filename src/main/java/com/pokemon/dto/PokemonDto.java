@@ -17,6 +17,7 @@ public class PokemonDto {
     private String name;
     private int weight;
     private String speciesName;
+    private int id;
 
     @SuppressWarnings("unchecked")
     @JsonProperty("brand")
@@ -51,6 +52,15 @@ public class PokemonDto {
         this.abilities = abilities;
     }
 
+    public PokemonDto(String name, int weight, String speciesName, int id, StatsDto[] stats, AbilitiesDto[] abilities) {
+        this.name = name;
+        this.weight = weight;
+        this.speciesName = speciesName;
+        this.id = id;
+        this.stats = stats;
+        this.abilities = abilities;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,6 +73,16 @@ public class PokemonDto {
     public int hashCode() {
 
         return Objects.hash(name);
+    }
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

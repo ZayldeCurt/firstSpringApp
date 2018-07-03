@@ -1,21 +1,11 @@
 package com.pokemon.rest;
 
 import com.pokemon.cache.PokemonCache;
-import com.pokemon.dto.AbilityDto;
 import com.pokemon.dto.PokemonDto;
-import com.pokemon.dto.TypeDto;
 import com.pokemon.service.PokemonService;
-import com.pokemon.service.PokemonServiceImp;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 //adnotacje Springa
@@ -67,12 +57,15 @@ public class PokemonClientRest {
 //        return null;
     }
 
-//    @PostMapping("/addPokemon")
-//    public ResponseEntity<String> addPokemon(@RequestBody PokemonDto pokemonDto){
-//
-//        pokemonCache.add(pokemonDto);
-//
-//        return null;
-//    }
+    @PostMapping("/addPokemon")
+    public ResponseEntity<String> addPokemon(@RequestBody PokemonDto pokemonDto){
+        pokemonCache.add(pokemonDto);
+        return null;
+    }
+
+    @RequestMapping("/showAll")
+    public void showAllFromSQLBase(){
+        pokemonCache.showAll();
+    }
 
 }
