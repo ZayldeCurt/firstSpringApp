@@ -33,7 +33,11 @@ public class PokemonClientRest {
     public PokemonDto getOurPokemon(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id){
 
         if(endPoint.equals("pokemon")){
-            PokemonDto pokemonDto = pokemonService.getPokemon(endPoint,id);
+            PokemonDto pokemonDto = pokemonCache.getPokemon(Integer.parseInt(id));
+            if(pokemonDto==null){
+                pokemonDto = pokemonService.getPokemon(endPoint,id);
+                pokemonCache.add(pokemonDto);
+            }
             return pokemonDto;
         }
         return null;
