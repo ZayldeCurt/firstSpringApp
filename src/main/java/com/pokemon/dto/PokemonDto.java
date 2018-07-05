@@ -23,8 +23,6 @@ public class PokemonDto {
     @JsonProperty("brand")
     private void unpackNested(Map<String,Object> species) {
         this.speciesName = (String)species.get("name");
-//        Map<String,String> owner = (Map<String,String>)species.get("owner");
-//        this.ownerName = owner.get("name");
     }
 
     @JsonProperty("stats")

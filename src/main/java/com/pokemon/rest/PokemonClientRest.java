@@ -1,5 +1,6 @@
 package com.pokemon.rest;
 
+import com.pokemon.exception.PokemonException;
 import com.pokemon.cache.PokemonCache;
 import com.pokemon.dto.PokemonDto;
 import com.pokemon.service.PokemonService;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.List;
 
 //adnotacje Springa
 //@Service //zostanie przy starcie utworzona pojedyńcza instancja, najczęściej używana, podstawowa //dodatkowo dodaje static do method
@@ -28,15 +31,14 @@ public class PokemonClientRest {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @RequestMapping("/{endPoint}/{id}")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
+    @RequestMapping("/user/{endPoint}/{id}")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
     // dzieki temu będzie ta funkcja widoczna z localhost:8080
-    public PokemonDto getOurPokemon(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id){
+    public PokemonDto getOurPokemonUser(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id){
 
         if(endPoint.equals("pokemon")){
             PokemonDto pokemonDto = pokemonCache.getPokemon(Integer.parseInt(id));
             if(pokemonDto==null){
                 pokemonDto = pokemonService.getPokemon(endPoint,id);
-                pokemonCache.add(pokemonDto);
             }
             return pokemonDto;
         }
@@ -61,15 +63,35 @@ public class PokemonClientRest {
 //        return null;
     }
 
-    @PostMapping("/addPokemon")
+    @RequestMapping("/admin/{endPoint}/{id}")//aby była widoczna jako usługa restowa, wystawia jako endpoint,
+    // dzieki temu będzie ta funkcja widoczna z localhost:8080
+    public PokemonDto getOurPokemonAdmin(@PathVariable(value = "endPoint") String endPoint,@PathVariable(value = "id") String id){
+
+        if(endPoint.equals("pokemon")){
+            PokemonDto pokemonDto = pokemonCache.getPokemon(Integer.parseInt(id));
+            if(pokemonDto==null){
+                pokemonDto = pokemonService.getPokemon(endPoint,id);
+                pokemonCache.add(pokemonDto);
+            }
+            return pokemonDto;
+        }
+        return null;
+    }
+
+
+    @PostMapping("/admin/addPokemon")
     public ResponseEntity<String> addPokemon(@RequestBody PokemonDto pokemonDto){
         pokemonCache.add(pokemonDto);
         return null;
     }
 
-    @RequestMapping("/showAll")
-    public void showAllFromSQLBase(){
-        pokemonCache.showAll();
+    @RequestMapping("/admin/showAll")
+    public List<PokemonDto> showAllFromSQLBase() throws PokemonException {
+        List<PokemonDto> pokemonDtos = pokemonCache.showAll();
+        if(pokemonDtos.size()==2){
+            throw new PokemonException();
+        }
+        return pokemonDtos;
     }
 
 }

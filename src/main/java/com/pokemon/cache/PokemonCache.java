@@ -64,7 +64,7 @@ public class PokemonCache {
         }
     }
 
-    public void showAll(){
+    public List<PokemonDto> showAll(){
         List<PokemonDto> pokemonDtoList = this.jdbcTemplate.query(
                 "select * from POKEMONS",
                 new RowMapper<PokemonDto>() {
@@ -77,7 +77,8 @@ public class PokemonCache {
                         return pokemonDto;
                     }
                 });
-        System.out.println("something");
+        return pokemonDtoList;
+//        System.out.println("something");
 
     }
 }
