@@ -85,7 +85,7 @@ public class PokemonClientRest {
         return null;
     }
 
-    @RequestMapping("/admin/showAll")
+    @RequestMapping("/api/showAll")
     public List<PokemonDto> showAllFromSQLBase() throws PokemonException {
         List<PokemonDto> pokemonDtos = pokemonCache.showAll();
         if(pokemonDtos.size()==2){
